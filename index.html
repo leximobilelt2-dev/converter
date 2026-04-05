@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bloxd Minecraft-Style Schematic Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; }
+        .card { background: #1e1e1e; border: 2px solid #388e3c; border-radius: 15px; padding: 30px; max-width: 700px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1 { color: #81c784; }
+        .description { color: #9e9e9e; margin-bottom: 20px; font-size: 14px; }
+        button { background: #4caf50; color: white; border: none; padding: 15px 40px; font-size: 18px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; width: 100%; }
+        button:hover { background: #66bb6a; transform: scale(1.02); }
+        textarea { width: 100%; height: 150px; margin-top: 20px; background: #000; color: #4caf50; border: 1px solid #333; border-radius: 5px; padding: 10px; font-family: monospace; font-size: 12px; display: none; }
+        .step { text-align: left; background: #262626; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #4caf50; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Bloxd Castle Converter</h1>
+    <p class="description">Version: v1481591874 (Minecraft Schematic Style)</p>
+    
+    <button onclick="generateCastle()">GENERATE HYPHEN BYPASS CODE</button>
+
+    <textarea id="output" readonly></textarea>
+
+    <div class="step">
+        <b>HOW TO LOAD IN BLOXD:</b><br>
+        1. Click Generate to get your Minecraft-style kingdom.<br>
+        2. Copy the long code starting with <b>BLOXD-</b>.<br>
+        3. Go to Bloxd and use your <b>WorldBuilder</b> tool.<br>
+        4. In chat, type: <b>//import</b> then paste the code.<br>
+        5. Type <b>//paste</b> to see the massive build.
+    </div>
+</div>
+
+<script>
+function generateCastle() {
+    const VERSION = "1481591874";
+    
+    // Detailed "Minecraft-Style" Logic (Towers, Arches, Roofs)
+    const castleData = {
+        v: parseInt(VERSION),
+        data: [
+            /* Floor & Foundation */
+            {a:"rect", b:"Dark Red Stone", p1:[-30,-1,-30], p2:[30,-1,30]},
+            /* Outer Fortified Walls */
+            {a:"walls", b:"Mossy Stone Bricks", p1:[-30,0,-30], p2:[30,8,30]},
+            /* Arched Entrance */
+            {a:"rect", b:"Air", p1:[-4,0,-30], p2:[4,5,-30]},
+            /* 4 Grand Corner Towers (Highly Detailed) */
+            {a:"walls", b:"Pine Log", p1:[-34,0,-34], p2:[-26,18,-26]},
+            {a:"walls", b:"Pine Log", p1:[26,0,-34], p2:[34,18,-26]},
+            {a:"walls", b:"Pine Log", p1:[-34,0,26], p2:[-26,18,34]},
+            {a:"walls", b:"Pine Log", p1:[26,0,26], p2:[34,18,34]},
+            /* Pointed Roofs for Towers */
+            {a:"rect", b:"Pine Wood Planks", p1:[-35,19,-35], p2:[-25,19,-25]},
+            {a:"rect", b:"Pine Wood Planks", p1:[25,19,-35], p2:[35,19,-25]},
+            {a:"rect", b:"Pine Wood Planks", p1:[-35,19,25], p2:[-25,19,35]},
+            {a:"rect", b:"Pine Wood Planks", p1:[25,19,25], p2:[35,19,35]},
+            /* Central Royal Keep (3 Layers) */
+            {a:"walls", b:"Mossy Stone Bricks", p1:[-12,0,-12], p2:[12,14,12]},
+            {a:"walls", b:"Pine Wood Planks", p1:[-10,15,-10], p2:[10,24,10]},
+            {a:"rect", b:"Pine Slab", p1:[-13,14,-13], p2:[13,14,13]},
+            /* Battlements (The "Spikes" on top of walls) */
+            {a:"rect", b:"Mossy Stone Bricks", p1:[-30,9,-30], p2:[30,9,30]}
+        ]
+    };
+
+    try {
+        // Convert to Minified JSON (WorldBuilder requirement)
+        const jsonStr = JSON.stringify(castleData);
+        // Base64 Encode (Hyphen requirement)
+        const base64 = btoa(jsonStr);
+        // Combine into Bypass format
+        const finalCode = `BLOXD-${VERSION}-${base64}`;
+
+        const outputArea = document.getElementById('output');
+        outputArea.value = finalCode;
+        outputArea.style.display = 'block';
+        
+        // Auto-Copy to Clipboard
+        outputArea.select();
+        document.execCommand('copy');
+        alert("Success! Minecraft-style Kingdom code copied to clipboard.");
+
+    } catch(e) {
+        alert("Converter Error: " + e);
+    }
+}
+</script>
+
+</body>
+</html>
